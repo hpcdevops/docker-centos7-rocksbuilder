@@ -1,0 +1,5 @@
+[Rocks-Forge-7.0]
+name=Rocks-Forge-7.0
+baseurl=https://forge.sdsc.edu/rocks/7.0/x86_64/Redhat/RPMS
+enabled=1
+gpgcheck=0

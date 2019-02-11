@@ -1,0 +1,15 @@
+--- /opt/rocks/share/devel/etc/Rules.mk	2019-02-04 21:55:21.934618837 -0800
++++ /opt/rocks/share/devel/etc/Rules.mk	2019-02-05 14:57:01.693782207 -0800
+@@ -595,10 +595,10 @@
+ 	@if [ "$(USERID)" != "0" ] ; then \
+ 		echo ; \
+ 		echo ; \
+-		echo ERROR - YOU MUST BE ROOT TO BUILD PACKAGES; \
++		echo WARNING - ROCKS MODIFIED TO ALLOW BUILD AS USER WITH SUDO; \
+ 		echo ; \
+ 		echo ; \
+-		exit 1 ; \
++		exit 0 ; \
+ 	fi
+
+ # --------------------------------------------------------------------- #

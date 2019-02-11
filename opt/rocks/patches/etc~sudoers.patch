@@ -1,0 +1,35 @@
+--- /etc/sudoers	2019-02-05 06:32:10.896609561 +0000
++++ /etc/sudoers	2019-02-05 07:04:18.186002983 +0000
+@@ -27,16 +27,19 @@
+ # Cmnd_Alias NETWORKING = /sbin/route, /sbin/ifconfig, /bin/ping, /sbin/dhclient, /usr/bin/net, /sbin/iptables, /usr/bin/rfcomm, /usr/bin/wvdial, /sbin/iwconfig, /sbin/mii-tool
+ 
+ ## Installation and management of software
+-# Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum
++Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum
+ 
+ ## Services
+ # Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig
+ 
+ ## Updating the locate database
+-# Cmnd_Alias LOCATE = /usr/bin/updatedb
++Cmnd_Alias LOCATE = /usr/bin/updatedb
+ 
+ ## Storage
+-# Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount, /bin/umount
++Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount, /bin/umount
++
++## Rocks
++Cmnd_Alias ROCKS = /usr/bin/make, /opt/rocks/bin/rocks, /bin/cp, /bin/rm, /bin/mv
+ 
+ ## Delegating permissions
+ # Cmnd_Alias DELEGATING = /usr/sbin/visudo, /bin/chown, /bin/chmod, /bin/chgrp 
+@@ -94,6 +97,9 @@
+ ## service management apps and more.
+ # %sys ALL = NETWORKING, SOFTWARE, SERVICES, STORAGE, DELEGATING, PROCESSES, LOCATE, DRIVERS
+ 
++## Allows members of the 'rocksbuilder' group to run software, storage, rocks, etc...
++%rocksbuilder ALL = NOPASSWD: SOFTWARE, STORAGE, LOCATE, ROCKS
++
+ ## Allows people in group wheel to run all commands
+ # %wheel	ALL=(ALL)	ALL
+ 
