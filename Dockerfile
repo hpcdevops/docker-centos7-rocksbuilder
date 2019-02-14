@@ -44,13 +44,14 @@ RUN \
 	newt-devel nfs-utils nspr-devel nspr ntp numactl numactl-devel OpenIPMI \
 	OpenIPMI-devel OpenIPMI-libs OpenIPMI-perl OpenIPMI-python OpenIPMI-tools \
 	openjade openmotif openmotif-devel opensp openssh-askpass openssh-server \
+	p7zip p7zip-plugins p7zip-doc \
 	pam-devel pango-devel pciutils-devel perf perl-CPAN perl-CPANPLUS \
 	perl-Data-Dumper perl-DBI perl-ExtUtils-ParseXS perl-GD perl-SGMLSpm \
 	perl-Test-Simple perl-version perl-YAML php-mysql portmap postfix protobuf \
 	pycairo-devel pygobject2 pygobject2-devel pykickstart python-devel \
-	python-setuptools qt-devel rcs rdate readline-devel redhat-lsb rpm-devel \
+	python-setuptools qt-devel rcs rdate readline-devel redhat-lsb rpm-build rpm-devel \
 	ruby rubygems ruby-libs screen sharutils slang-devel snappy-devel \
-	sqlite-devel squashfs-tools strace subversion subversion-perl swig syslinux \
+	sqlite-devel squashfs-tools strace subversion subversion-perl sudo swig syslinux \
 	syslinux-perl sysstat tcl tcl-devel tclx tcpdump tcp_wrappers-devel tcsh \
 	telnet tex texlive texlive-ec tk-devel urw-fonts usermode wget wodim \
 	xfsprogs xmlto xorg-x11-server-Xvfb xorg-x11-util-macros xorg-x11-xauth \
@@ -60,12 +61,12 @@ RUN \
 
 RUN \
 	yum makecache fast && \
-	yum -y install
+	yum -y install \
 		foundation-ant foundation-ant foundation-coreutils foundation-gawk \
 		foundation-gawk foundation-git foundation-graphviz foundation-libxml2 \
 		foundation-mysql foundation-mysql foundation-python \
 		foundation-python-extras foundation-python-setuptools foundation-python-xml \
-		foundation-rcs foundation-redhat foundation-tidy foundation-wget mosh serf \
+		foundation-rcs foundation-redhat foundation-tidy foundation-wget serf \
 		tentakel librocks && \
 	yum -y clean all && \
 	rm -rf /var/cache/yum
