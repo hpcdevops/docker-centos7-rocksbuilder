@@ -93,6 +93,9 @@ RUN \
 		/opt/rocks/share/devel/etc/Rules.mk \
 		/opt/rocks/patches/opt~rocks~share~devel~etc~Rules.mk.patch && \
 	patch --backup \
+	  /opt/rocks/share/devel/src/roll/etc/bootstrap-functions.sh \
+		/opt/rocks/patches/opt~rocks~share~devel~src~roll~etc~bootstrap-functions.sh && \
+	patch --backup \
 		/opt/rocks/lib/python2.7/site-packages/rocks/commands/create/mirror/__init__.py \
 		/opt/rocks/patches/opt~rocks~lib~python2.7~site-packages~rocks~commands~create~mirror~__init__.py.patch && \
 	patch --backup \
