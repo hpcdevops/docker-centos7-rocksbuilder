@@ -88,19 +88,19 @@ RUN \
 RUN \
 	patch --backup \
 		/etc/sudoers \
-		/opt/rocks/patches/etc~sudoers.patch && \
+		/opt/rocks/patches/etc-sudoers.patch && \
 	patch --backup \
 		/opt/rocks/share/devel/etc/Rules.mk \
-		/opt/rocks/patches/opt~rocks~share~devel~etc~Rules.mk.patch && \
+		/opt/rocks/patches/opt-rocks-share-devel-etc-Rules.mk.patch && \
 	patch --backup \
 	  /opt/rocks/share/devel/src/roll/etc/bootstrap-functions.sh \
-		/opt/rocks/patches/opt~rocks~share~devel~src~roll~etc~bootstrap-functions.sh && \
+		/opt/rocks/patches/opt-rocks-share-devel-src-roll-etc-bootstrap-functions.sh.patch && \
 	patch --backup \
 		/opt/rocks/lib/python2.7/site-packages/rocks/commands/create/mirror/__init__.py \
-		/opt/rocks/patches/opt~rocks~lib~python2.7~site-packages~rocks~commands~create~mirror~__init__.py.patch && \
+		/opt/rocks/patches/rocks-commands-create-mirror.patch && \
 	patch --backup \
 		/opt/rocks/lib/python2.7/site-packages/rocks/commands/create/roll/__init__.py \
-		/opt/rocks/patches/opt~rocks~lib~python2.7~site-packages~rocks~commands~create~roll~__init__.py.patch
+		/opt/rocks/patches/rocks-commands-create-roll.patch
 
 HEALTHCHECK CMD exit 0
 

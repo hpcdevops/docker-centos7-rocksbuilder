@@ -1,18 +1,18 @@
---- /opt/rocks/lib/python2.7/site-packages/rocks/commands/create/mirror/__init__.py	2017-12-02 01:31:31.000000000 +0000
+--- /opt/rocks/lib/python2.7/site-packages/rocks/commands/create/mirror/__init__.py.orig	2017-12-02 01:31:31.000000000 +0000
 +++ /opt/rocks/lib/python2.7/site-packages/rocks/commands/create/mirror/__init__.py	2019-02-14 17:21:48.000000000 +0000
 @@ -173,21 +173,25 @@
  	Rocks running on this machine).
  	</param>
-
+ 
 +	<param type='string' name='release'>
 +	The release number of the created Roll. (default = 0).
 +	</param>
 +
  	<param type='string' name='arch'>
- 	Architecture of the mirror. (default = the architecture of
+ 	Architecture of the mirror. (default = the architecture of 
  	of the OS running on this machine).
  	</param>
-
+ 
 -	<example cmd='create mirror http://mirrors.kernel.org/centos/4.5/updates/i386/RPMS rollname=updates version=4.5'>
 +	<example cmd='create mirror https://mirror.centos.org/centos-7/7.6.1810/updates/x86_64/Packages rollname=CentOS-Updates version=7.6.1810 release=2019.01.29'>
  	Will mirror all the packages found under the URL
@@ -22,51 +22,52 @@
 +	a Roll ISO image named 'CentOS-Updates-7.6.1810-2019.01.29.x86_64.disk1.iso'.
  	</example>
  	"""
-
-
+ 
+ 
  	def mirror(self, mirror_path):
 -		cmd = 'wget -erobots=off -m -nv -np %s' % (mirror_path)
 +		cmd = 'wget -erobots=off --reject "drpm" -m -nv -np %s' % (mirror_path)
  		os.system(cmd)
-
+ 
  		if len(mirror_path) > 6:
 @@ -201,7 +205,7 @@
  		os.symlink(mirrordir, 'RPMS')
-
-
+ 
+ 
 -	def makeRollXML(self, rollname, version, arch, xmlfilename):
 +	def makeRollXML(self, rollname, version, release, arch, xmlfilename):
  		file = open(xmlfilename, 'w')
  		file.write('<roll name="%s" interface="4.0">\n' % rollname)
-
+ 
 @@ -212,8 +216,8 @@
  			(rolltime, rolldate, rollzone))
-
+ 
  		file.write('\t<color edge="lawngreen" node="lawngreen"/>\n')
--		file.write('\t<info version="%s" release="0" arch="%s"/>\n' %
+-		file.write('\t<info version="%s" release="0" arch="%s"/>\n' % 
 -			(version, arch))
-+		file.write('\t<info version="%s" release="%s" arch="%s"/>\n' %
++		file.write('\t<info version="%s" release="%s" arch="%s"/>\n' % 
 +			(version, release, arch))
-
+ 
  		file.write('\t<iso maxsize="0" bootable="0" mkisofs=""/>\n')
  		file.write('\t<rpm rolls="0" bin="1" src="0"/>/\n')
 @@ -233,9 +237,10 @@
  			self.abort('must supply one path')
  		mirror_path = args[0]
-
+ 		
 -		(rollname, version, arch) = self.fillParams(
 +		(rollname, version, release, arch) = self.fillParams(
  			[('rollname', 'updates'),
  			('version', rocks.version),
 +			('release', '0'),
  			('arch',self.arch)])
-
+ 
  		xmlfilename = 'roll-%s.xml' % rollname
 @@ -243,7 +248,7 @@
  		self.clean()
-
+ 		
  		self.mirror(mirror_path)
 -		self.makeRollXML(rollname, version, arch, xmlfilename)
 +		self.makeRollXML(rollname, version, release, arch, xmlfilename)
-
+ 		
  		self.command('create.roll', [ '%s' % (xmlfilename) ] )
+ 		
